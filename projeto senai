@@ -1,0 +1,524 @@
+
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Acessibilidade Digital | Gestão Inteligente com IA</title>
+<meta name="description" content="Sistema Inteligente de Gestão de Acessibilidade e Inclusão Organizacional via IA - SENAI MT + Petrobras">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--verde:#008542;--verde2:#00A86B;--amarelo:#FFD100;--azul:#0A1F44;--bg:#F8FAFC;--card:#fff;--txt:#0A1F44;--txt2:#475569;--borda:rgba(10,31,68,.08);--sh:0 8px 30px rgba(10,31,68,.1)}
+body.dark{--bg:#0A0F1E;--card:#141B2E;--txt:#F1F5F9;--txt2:#CBD5E1;--borda:rgba(255,255,255,.08)}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);line-height:1.6;transition:.3s;overflow-x:hidden}
+@keyframes up{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pl{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+@keyframes gr{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+@keyframes bl{50%{opacity:.3}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
+@keyframes glow{0%,100%{box-shadow:0 8px 24px rgba(0,133,66,.3)}50%{box-shadow:0 12px 40px rgba(0,133,66,.6)}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.reveal{opacity:0;transform:translateY(40px);transition:.8s}
+.reveal.on{opacity:1;transform:none}
+
+header{position:sticky;top:0;z-index:100;background:rgba(10,31,68,.92);backdrop-filter:blur(20px);padding:14px 28px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.08)}
+.logo{display:flex;align-items:center;gap:12px;color:#fff;font-weight:700;font-size:1rem}
+.lm{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,#FFD100,#FF9500);display:flex;align-items:center;justify-content:center;color:#008542;font-weight:900;font-size:1.4rem;animation:pl 3s infinite}
+.logo small{display:block;font-size:.68rem;font-weight:400;opacity:.75}
+nav{display:flex;gap:4px}
+nav a{color:rgba(255,255,255,.85);text-decoration:none;padding:9px 14px;border-radius:10px;font-weight:500;font-size:.86rem;transition:.3s}
+nav a:hover{background:rgba(255,209,0,.12);color:#FFD100}
+.ibtn{width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:#fff;cursor:pointer;font-size:1rem;transition:.3s}
+.ibtn:hover{background:rgba(255,209,0,.15);color:#FFD100}
+#mb{display:none}
+
+.hero{padding:80px 28px 100px;background:linear-gradient(135deg,#0A1F44 0%,#1B3A6B 35%,#0066CC 65%,#008542 100%);background-size:300% 300%;animation:gr 18s infinite;color:#fff;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;width:500px;height:500px;background:rgba(255,209,0,.2);border-radius:50%;filter:blur(60px);top:-200px;left:-150px;animation:fl 12s infinite}
+.hero::after{content:'';position:absolute;width:450px;height:450px;background:rgba(0,168,107,.25);border-radius:50%;filter:blur(60px);bottom:-180px;right:-100px;animation:fl 15s infinite reverse}
+.hi{position:relative;z-index:2;max-width:880px;margin:0 auto;animation:up 1s}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;margin-bottom:24px;background:rgba(255,209,0,.1);border:1px solid rgba(255,209,0,.35);border-radius:50px;font-size:.8rem;backdrop-filter:blur(10px)}
+.badge .dot{width:8px;height:8px;border-radius:50%;background:#FFD100;animation:pl 2s infinite}
+.hero h1{font-size:clamp(2rem,5.5vw,3.4rem);font-weight:800;letter-spacing:-.03em;line-height:1.1;margin-bottom:18px}
+.hero h1 span{background:linear-gradient(90deg,#FFD100,#FF9500,#FFD100);background-size:200% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:gr 4s linear infinite}
+.hero p{font-size:1.08rem;max-width:660px;margin:0 auto 30px;color:rgba(255,255,255,.9)}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 32px;border:none;border-radius:50px;font-family:inherit;font-weight:700;font-size:.95rem;cursor:pointer;text-decoration:none;transition:.3s}
+.bp{background:linear-gradient(135deg,#FFD100,#FF9500);color:#0A1F44;box-shadow:0 10px 30px rgba(255,209,0,.35)}
+.bp:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(255,209,0,.5)}
+.bg2{background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.25);color:#fff;backdrop-filter:blur(10px)}
+.bg2:hover{background:rgba(255,255,255,.15);border-color:#FFD100;color:#FFD100}
+.hstats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px;margin-top:50px;max-width:640px;margin-left:auto;margin-right:auto}
+.hs{padding:16px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(10px)}
+.hs b{display:block;font-size:1.5rem;font-weight:800;color:#FFD100}
+.hs span{font-size:.78rem;opacity:.85}
+
+.sec{padding:80px 28px;max-width:1140px;margin:0 auto}
+.sh{text-align:center;margin-bottom:50px}
+.tag{display:inline-block;padding:6px 14px;background:rgba(0,133,66,.1);color:var(--verde);border-radius:50px;font-size:.75rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px}
+.sec h2{font-size:clamp(1.6rem,4vw,2.3rem);font-weight:800;letter-spacing:-.03em;color:var(--txt);margin-bottom:12px}
+.sec .sub{font-size:1rem;color:var(--txt2);max-width:620px;margin:0 auto}
+
+.sistema{background:var(--card);border-radius:24px;padding:40px 32px;box-shadow:0 20px 60px rgba(10,31,68,.12);border:1px solid var(--borda);max-width:800px;margin:0 auto}
+.step-hide{display:none}
+.progress{display:flex;gap:8px;margin-bottom:15px}
+.progress div{flex:1;height:8px;background:rgba(10,31,68,.08);border-radius:4px;transition:.5s}
+.progress div.on{background:linear-gradient(90deg,#008542,#FFD100);box-shadow:0 0 15px rgba(0,133,66,.4)}
+.step-label{text-align:center;font-size:.82rem;color:var(--txt2);margin-bottom:25px;font-weight:500}
+.step-label b{color:var(--verde)}
+.q-title{font-size:1.4rem;font-weight:800;color:var(--txt);margin-bottom:6px}
+.q-desc{color:var(--txt2);font-size:.92rem;margin-bottom:24px}
+.options{display:grid;gap:11px}
+.opt{padding:16px 18px;border-radius:14px;border:2px solid rgba(10,31,68,.1);background:var(--bg);cursor:pointer;transition:.3s;display:flex;align-items:center;gap:14px;text-align:left;font-family:inherit;color:var(--txt);font-size:.92rem;width:100%;position:relative}
+.opt:hover{border-color:var(--verde);background:rgba(0,133,66,.05);transform:translateX(5px)}
+.opt.selected{border-color:var(--verde);background:rgba(0,133,66,.08);box-shadow:0 0 0 3px rgba(0,133,66,.15)}
+.opt.selected::after{content:'✓';position:absolute;right:16px;color:var(--verde);font-weight:900;font-size:1.2rem}
+.opt .ic{font-size:1.5rem;flex-shrink:0}
+.opt b{display:block;font-weight:700;margin-bottom:2px}
+.opt small{color:var(--txt2);font-size:.8rem}
+
+.field{display:flex;flex-direction:column;gap:7px;margin-bottom:16px}
+.field label{font-size:.88rem;font-weight:600;color:var(--txt)}
+.field input,.field textarea{padding:13px 16px;border-radius:12px;border:2px solid rgba(10,31,68,.1);background:var(--bg);color:var(--txt);font-size:.92rem;font-family:inherit;outline:none;transition:.3s}
+.field input:focus,.field textarea:focus{border-color:var(--verde);box-shadow:0 0 0 4px rgba(0,133,66,.12)}
+.field textarea{resize:vertical;min-height:110px}
+
+.actions{display:flex;gap:12px;margin-top:25px;flex-wrap:wrap}
+.btn-primary{flex:1;padding:16px 26px;border:none;border-radius:50px;background:linear-gradient(135deg,#008542,#00A86B);color:#fff;font-weight:700;font-size:.95rem;font-family:inherit;cursor:pointer;transition:.3s;display:flex;align-items:center;justify-content:center;gap:10px;min-width:200px}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,133,66,.5)}
+.btn-primary:disabled{opacity:.4;cursor:not-allowed;transform:none;background:#94A3B8}
+.btn-primary.ready{animation:glow 2s infinite}
+.btn-back{padding:16px 24px;border:2px solid rgba(10,31,68,.15);border-radius:50px;background:transparent;color:var(--txt);font-weight:600;font-size:.95rem;font-family:inherit;cursor:pointer;transition:.3s;display:flex;align-items:center;gap:8px}
+.btn-back:hover{border-color:var(--verde);color:var(--verde)}
+.spin{width:16px;height:16px;border:2.5px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite}
+.shake{animation:shake .3s}
+
+.result{background:linear-gradient(135deg,#008542,#00A86B);color:#fff;padding:36px 26px;border-radius:20px;animation:up .6s}
+.result .check{width:70px;height:70px;border-radius:50%;background:#FFD100;color:#008542;font-size:2.2rem;font-weight:900;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;animation:pl 2s infinite}
+.result h3{font-size:1.5rem;font-weight:800;margin-bottom:8px;text-align:center}
+.result .proto{display:block;padding:10px 18px;background:rgba(0,0,0,.15);border-radius:50px;font-family:monospace;font-size:.95rem;font-weight:700;margin:14px auto;letter-spacing:1px;text-align:center;width:fit-content}
+.ia-box{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:16px;padding:20px;margin:18px 0;text-align:left;backdrop-filter:blur(10px)}
+.ia-box h4{font-size:1rem;font-weight:700;margin-bottom:12px}
+.ia-box ul{list-style:none;padding:0}
+.ia-box li{padding:7px 0;padding-left:24px;position:relative;font-size:.88rem;line-height:1.5}
+.ia-box li::before{content:'✓';position:absolute;left:0;color:#FFD100;font-weight:900}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0}
+.tag-r{padding:5px 12px;background:rgba(0,0,0,.2);border-radius:20px;font-size:.75rem;font-weight:600}
+.status-info{background:rgba(0,0,0,.15);border-radius:12px;padding:14px;margin-top:14px;font-size:.85rem;text-align:center}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+.card{background:var(--card);padding:26px;border-radius:20px;border:1px solid var(--borda);box-shadow:var(--sh);transition:.4s;position:relative;overflow:hidden}
+.card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(10,31,68,.15)}
+.ci{width:54px;height:54px;border-radius:14px;background:linear-gradient(135deg,rgba(0,133,66,.12),rgba(255,209,0,.12));display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:16px}
+.card h3{font-size:1rem;font-weight:700;color:var(--txt);margin-bottom:6px}
+.card p{color:var(--txt2);font-size:.86rem}
+
+#cb{position:fixed;bottom:22px;right:22px;width:62px;height:62px;border-radius:50%;background:linear-gradient(135deg,#008542,#00A86B);border:none;color:#fff;font-size:1.5rem;cursor:pointer;z-index:999;box-shadow:0 12px 32px rgba(0,133,66,.5);animation:pl 2.5s infinite}
+#cbx{position:fixed;bottom:96px;right:22px;width:390px;max-width:calc(100vw - 32px);height:620px;max-height:calc(100vh - 130px);background:var(--card);border-radius:22px;box-shadow:0 30px 80px rgba(0,0,0,.35);display:none;flex-direction:column;overflow:hidden;z-index:998}
+#cbx.open{display:flex;animation:up .35s}
+.ch{background:linear-gradient(135deg,#0A1F44,#008542);color:#fff;padding:16px 18px;display:flex;align-items:center;gap:12px}
+.ca{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#FFD100,#FF9500);display:flex;align-items:center;justify-content:center;font-size:1.25rem;position:relative}
+.ca::after{content:'';position:absolute;bottom:0;right:0;width:11px;height:11px;background:#00FF7F;border:2.5px solid #0A1F44;border-radius:50%}
+.cm{flex:1}
+.cm h4{font-size:.92rem;font-weight:700}
+.cm p{font-size:.72rem;opacity:.85}
+#cc{background:none;border:none;color:#fff;font-size:1.4rem;cursor:pointer}
+#cbd{flex:1;padding:16px;overflow-y:auto;background:var(--bg);display:flex;flex-direction:column;gap:11px}
+.msg{max-width:82%;padding:11px 15px;border-radius:16px;font-size:.86rem;line-height:1.55;animation:up .3s;word-wrap:break-word}
+.msg.bot{background:var(--card);color:var(--txt);border:1px solid var(--borda);border-bottom-left-radius:5px;align-self:flex-start}
+.msg.user{background:linear-gradient(135deg,#008542,#00A86B);color:#fff;align-self:flex-end;border-bottom-right-radius:5px}
+.msg.typing{background:var(--card);border:1px solid var(--borda);align-self:flex-start;display:flex;gap:4px;padding:13px 17px}
+.msg.typing span{width:7px;height:7px;border-radius:50%;background:#94A3B8;animation:bl 1.2s infinite}
+.msg.typing span:nth-child(2){animation-delay:.2s}
+.msg.typing span:nth-child(3){animation-delay:.4s}
+.qr{display:flex;flex-wrap:wrap;gap:5px;padding:9px 13px;background:var(--card);border-top:1px solid var(--borda)}
+.qr button{background:rgba(0,133,66,.08);color:var(--verde);border:1px solid rgba(0,133,66,.25);padding:5px 10px;border-radius:50px;font-size:.7rem;font-family:inherit;cursor:pointer;transition:.2s}
+.qr button:hover{background:var(--verde);color:#fff}
+.cin{display:flex;padding:11px;gap:8px;background:var(--card);border-top:1px solid var(--borda)}
+.cin input{flex:1;padding:11px 16px;border-radius:50px;border:1.5px solid rgba(10,31,68,.1);background:var(--bg);color:var(--txt);font-size:.88rem;font-family:inherit;outline:none}
+.cin input:focus{border-color:var(--verde)}
+.cin button{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#008542,#00A86B);border:none;color:#fff;cursor:pointer;flex-shrink:0}
+
+footer{background:#0A1F44;color:#fff;padding:50px 28px 25px;text-align:center}
+footer p{opacity:.75;font-size:.85rem;margin-bottom:6px}
+footer a{color:#FFD100;text-decoration:none}
+.fc{padding-top:20px;margin-top:20px;border-top:1px solid rgba(255,255,255,.08);font-size:.78rem;opacity:.6}
+
+@media(max-width:900px){
+  #mb{display:flex}
+  nav{position:fixed;top:68px;left:0;right:0;background:rgba(10,31,68,.98);backdrop-filter:blur(20px);flex-direction:column;padding:16px;gap:6px;transform:translateY(-120%);transition:.35s;z-index:99}
+  nav.open{transform:translateY(0)}
+  nav a{width:100%;text-align:center;padding:13px}
+  header{padding:12px 18px}
+  .sec{padding:55px 18px}
+  .hero{padding:60px 18px 80px}
+  .sistema{padding:28px 20px}
+  .actions{flex-direction:column}
+  .btn-back{width:100%;justify-content:center}
+  #cbx{bottom:88px;right:14px;height:calc(100vh - 120px)}
+}
+@media(max-width:480px){.hero h1{font-size:1.9rem}.btn{padding:13px 24px;font-size:.88rem}}
+:focus-visible{outline:3px solid #FFD100;outline-offset:3px;border-radius:6px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="lm">♿</div>
+    <div>Acessibilidade Digital<small>Gestão Inteligente com IA</small></div>
+  </div>
+  <nav id="nav">
+    <a href="#sistema" onclick="cm2()">Atendimento</a>
+    <a href="#recursos" onclick="cm2()">Recursos</a>
+    <a href="#sobre" onclick="cm2()">Sobre</a>
+  </nav>
+  <div style="display:flex;gap:8px">
+    <button class="ibtn" onclick="tt()">🌙</button>
+    <button class="ibtn" id="mb" onclick="tm()">☰</button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hi">
+    <div class="badge"><span class="dot"></span>Sistema Inteligente de Inclusão Organizacional</div>
+    <h1>Projeto <span>Acessibilidade Digital</span><br>Gestão Inteligente com IA</h1>
+    <p>Identificação, classificação e resolução automática de barreiras de acessibilidade — arquitetônicas, comunicacionais, tecnológicas, institucionais e atitudinais.</p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+      <a href="#sistema" class="btn bp">🎯 Iniciar Atendimento</a>
+      <a href="#sobre" class="btn bg2">📖 Sobre o Projeto</a>
+    </div>
+    <div class="hstats">
+      <div class="hs"><b>+85%</b><span>Eficiência na gestão</span></div>
+      <div class="hs"><b>-70%</b><span>Tempo de resposta</span></div>
+      <div class="hs"><b>24/7</b><span>Suporte com IA</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="sistema" class="sec">
+  <div class="sh">
+    <span class="tag">Atendimento Inteligente</span>
+    <h2>Registre sua demanda</h2>
+    <p class="sub">Responda as 4 etapas e a IA gera um plano de ação personalizado</p>
+  </div>
+
+  <div class="sistema">
+    <div class="progress">
+      <div id="p1" class="on"></div>
+      <div id="p2"></div>
+      <div id="p3"></div>
+      <div id="p4"></div>
+    </div>
+    <div class="step-label">Etapa <b><span id="stepNum">1</span> de 4</b> — <span id="stepName">Tipo de Barreira</span></div>
+
+    <div id="s1">
+      <div class="q-title">Qual o tipo de barreira?</div>
+      <div class="q-desc">Selecione a categoria que melhor descreve sua situação</div>
+      <div class="options">
+        <button class="opt" data-tipo="arquitetonica"><span class="ic">🏗️</span><div><b>Barreira Arquitetônica</b><small>Rampas, elevadores, banheiros, circulação</small></div></button>
+        <button class="opt" data-tipo="comunicacional"><span class="ic">🗣️</span><div><b>Barreira Comunicacional</b><small>Libras, Braille, audiodescrição, leitor de tela</small></div></button>
+        <button class="opt" data-tipo="tecnologica"><span class="ic">💻</span><div><b>Barreira Tecnológica</b><small>Sistemas, sites, aplicativos internos</small></div></button>
+        <button class="opt" data-tipo="transporte"><span class="ic">🚌</span><div><b>Barreira de Transporte</b><small>Locomoção, veículos adaptados</small></div></button>
+        <button class="opt" data-tipo="institucional"><span class="ic">📋</span><div><b>Barreira Institucional</b><small>Políticas, normas, processos internos</small></div></button>
+        <button class="opt" data-tipo="atitudinal"><span class="ic">🧠</span><div><b>Barreira Atitudinal</b><small>Capacitismo, preconceito, exclusão</small></div></button>
+      </div>
+      <div class="actions">
+        <button class="btn-primary" id="btn1" onclick="avancar(2)" disabled>Continuar →</button>
+      </div>
+    </div>
+
+    <div id="s2" class="step-hide">
+      <div class="q-title">Onde acontece?</div>
+      <div class="q-desc">Local para direcionar a demanda ao setor correto</div>
+      <div class="options">
+        <button class="opt" data-local="refinaria"><span class="ic">🏭</span><div><b>Refinaria / Planta Industrial</b></div></button>
+        <button class="opt" data-local="offshore"><span class="ic">🛢️</span><div><b>Plataforma Offshore</b></div></button>
+        <button class="opt" data-local="escritorio"><span class="ic">🏢</span><div><b>Escritório Administrativo</b></div></button>
+        <button class="opt" data-local="digital"><span class="ic">🖥️</span><div><b>Sistema / Ambiente Digital</b></div></button>
+        <button class="opt" data-local="rh"><span class="ic">👥</span><div><b>RH / Gestão de Pessoas</b></div></button>
+      </div>
+      <div class="actions">
+        <button class="btn-back" onclick="voltar(1)">← Voltar</button>
+        <button class="btn-primary" id="btn2" onclick="avancar(3)" disabled>Continuar →</button>
+      </div>
+    </div>
+
+    <div id="s3" class="step-hide">
+      <div class="q-title">Nível de urgência</div>
+      <div class="q-desc">A IA prioriza automaticamente conforme a gravidade</div>
+      <div class="options">
+        <button class="opt" data-urg="critica"><span class="ic">🚨</span><div><b>Crítica</b><small>Impede trabalho ou oferece risco</small></div></button>
+        <button class="opt" data-urg="alta"><span class="ic">⚠️</span><div><b>Alta</b><small>Prejudica atividades diárias</small></div></button>
+        <button class="opt" data-urg="media"><span class="ic">⏰</span><div><b>Média</b><small>Limita parcialmente</small></div></button>
+        <button class="opt" data-urg="baixa"><span class="ic">📅</span><div><b>Baixa</b><small>Melhoria contínua</small></div></button>
+      </div>
+      <div class="actions">
+             <div class="actions">
+        <button class="btn-back" onclick="voltar(2)">← Voltar</button>
+        <button class="btn-primary" id="btn3" onclick="avancar(4)" disabled>Continuar →</button>
+      </div>
+    </div>
+
+    <div id="s4" class="step-hide">
+      <div class="q-title">Detalhes da demanda</div>
+      <div class="q-desc">Suas informações são confidenciais e protegidas</div>
+      <div class="field"><label>Nome completo *</label><input type="text" id="f-nome" placeholder="Seu nome completo"></div>
+      <div class="field"><label>Email corporativo *</label><input type="email" id="f-email" placeholder="seuemail@petrobras.com.br"></div>
+      <div class="field"><label>Setor / Matrícula</label><input type="text" id="f-setor" placeholder="Ex: Refinaria RPBC - Mat. 12345"></div>
+      <div class="field"><label>Descreva a barreira *</label><textarea id="f-desc" placeholder="Descreva com detalhes: onde, quando, o que impede, quem é afetado..."></textarea></div>
+      <div class="actions">
+        <button class="btn-back" onclick="voltar(3)">← Voltar</button>
+        <button class="btn-primary" id="sbtn" onclick="processarIA()">🤖 Processar com IA</button>
+      </div>
+    </div>
+
+    <div id="s5" class="step-hide">
+      <div class="result">
+        <div class="check">✓</div>
+        <h3>Demanda Registrada</h3>
+        <p style="text-align:center;font-size:.9rem;opacity:.95">A IA classificou e gerou um plano de ação personalizado</p>
+        <div class="proto" id="protocolo">#AD-000000</div>
+        <div class="ia-box" id="iaBox"></div>
+        <div class="status-info">
+          📧 <strong>Encaminhado automaticamente</strong> para a equipe responsável<br>
+          ⏱️ Prazo estimado: <strong id="prazo">24 horas</strong>
+        </div>
+        <div style="margin-top:18px;text-align:center">
+          <button class="btn-primary" onclick="location.reload()" style="margin:0 auto">🔄 Nova Solicitação</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="recursos" class="sec reveal">
+  <div class="sh">
+    <span class="tag">Tecnologia</span>
+    <h2>Como a IA otimiza a gestão</h2>
+    <p class="sub">Solução alinhada ao projeto de Inclusão Organizacional</p>
+  </div>
+  <div class="cards">
+    <div class="card"><div class="ci">🧠</div><h3>Classificação Automática</h3><p>IA identifica a categoria da barreira e prioriza por gravidade.</p></div>
+    <div class="card"><div class="ci">⚡</div><h3>Resposta Ágil</h3><p>Elimina o alto esforço manual e respostas reativas.</p></div>
+    <div class="card"><div class="ci">📊</div><h3>Visão Integrada</h3><p>Centraliza dados para gestão orientada e assertiva.</p></div>
+    <div class="card"><div class="ci">📋</div><h3>Plano de Ação IA</h3><p>Cada demanda gera recomendações específicas automáticas.</p></div>
+    <div class="card"><div class="ci">📈</div><h3>Analytics Preditivo</h3><p>Prevê necessidades futuras por setor e perfil.</p></div>
+    <div class="card"><div class="ci">🔒</div><h3>Confidencialidade</h3><p>Dados protegidos e tratamento ético das informações.</p></div>
+  </div>
+</section>
+
+<section id="sobre" class="sec reveal">
+  <div class="sh">
+    <span class="tag">Sobre</span>
+    <h2>Acessibilidade Digital</h2>
+    <p class="sub"><strong>Otimização da Gestão de Acessibilidade e Inclusão Organizacional via Inteligência Artificial</strong><br><br>Empresa parceira: Petrobras<br>Escola: Instituto SENAI de Tecnologia de Mato Grosso<br>Área: Tecnologia da Informação<br>Evento: Feira de Tecnologia e Inovação 2025</p>
+  </div>
+</section>
+
+<button id="cb" onclick="toggleChat()">💬</button>
+<div id="cbx">
+  <div class="ch">
+    <div class="ca">🤖</div>
+    <div class="cm"><h4>Assistente IA Digital</h4><p>Online agora</p></div>
+    <button id="cc" onclick="toggleChat()">×</button>
+  </div>
+  <div id="cbd"></div>
+  <div class="qr">
+    <button onclick="qa('O que é acessibilidade?')">Acessibilidade</button>
+    <button onclick="qa('Quais leis existem?')">Leis</button>
+    <button onclick="qa('Como a IA ajuda?')">IA</button>
+    <button onclick="qa('O que é capacitismo?')">Capacitismo</button>
+    <button onclick="qa('Como usar o sistema?')">Como usar</button>
+  </div>
+  <div class="cin">
+    <input id="ci" placeholder="Digite sua dúvida..." onkeypress="if(event.key==='Enter')send()">
+    <button onclick="send()">➤</button>
+  </div>
+</div>
+
+<footer>
+  <p><strong>Otimização da Gestão de Acessibilidade e Inclusão Organizacional via IA</strong></p>
+  <p>Petrobras • Instituto SENAI de Tecnologia de Mato Grosso • 2025</p>
+  <p>Contato: <a href="mailto:felipecosta02838@gmail.com">felipecosta02838@gmail.com</a></p>
+  <div class="fc">© 2025 Acessibilidade Digital — Projeto SENAI MT</div>
+</footer>
+
+<script>
+function tt(){document.body.classList.toggle('dark');document.querySelectorAll('.ibtn')[0].textContent=document.body.classList.contains('dark')?'☀️':'🌙';}
+function tm(){document.getElementById('nav').classList.toggle('open');}
+function cm2(){document.getElementById('nav').classList.remove('open');}
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('on');obs.unobserve(x.target);}})},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(e=>obs.observe(e));
+
+let dados={tipo:'',local:'',urgencia:''};
+const NOMES={1:'Tipo de Barreira',2:'Local da Ocorrência',3:'Nível de Urgência',4:'Detalhes da Demanda'};
+
+function mostrarEtapa(n){
+  ['s1','s2','s3','s4','s5'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.display='none';});
+  const alvo=document.getElementById('s'+n);
+  if(alvo){alvo.style.display='block';alvo.classList.remove('step-hide');}
+  for(let i=1;i<=4;i++){const p=document.getElementById('p'+i);if(p){if(i<=Math.min(n,4))p.classList.add('on');else p.classList.remove('on');}}
+  if(document.getElementById('stepNum'))document.getElementById('stepNum').textContent=Math.min(n,4);
+  if(document.getElementById('stepName')&&NOMES[n])document.getElementById('stepName').textContent=NOMES[n];
+  document.getElementById('sistema').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function avancar(n){mostrarEtapa(n);}
+function voltar(n){mostrarEtapa(n);}
+
+document.querySelectorAll('#s1 .opt').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('#s1 .opt').forEach(b=>b.classList.remove('selected'));
+    btn.classList.add('selected');
+    dados.tipo=btn.dataset.tipo;
+    const b=document.getElementById('btn1');
+    b.disabled=false;
+    b.classList.add('ready');
+  });
+});
+document.querySelectorAll('#s2 .opt').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('#s2 .opt').forEach(b=>b.classList.remove('selected'));
+    btn.classList.add('selected');
+    dados.local=btn.dataset.local;
+    const b=document.getElementById('btn2');
+    b.disabled=false;
+    b.classList.add('ready');
+  });
+});
+document.querySelectorAll('#s3 .opt').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('#s3 .opt').forEach(b=>b.classList.remove('selected'));
+    btn.classList.add('selected');
+    dados.urgencia=btn.dataset.urg;
+    const b=document.getElementById('btn3');
+    b.disabled=false;
+    b.classList.add('ready');
+  });
+});
+
+const PLANOS={
+  arquitetonica:['Vistoria técnica no local em até 48h','Análise de adaptação conforme NBR 9050','Adequação do espaço físico (rampas, corrimãos, sinalização)','Instalação de recursos assistivos necessários','Acompanhamento contínuo com equipe de engenharia'],
+  comunicacional:['Implantação de intérprete de Libras quando necessário','Produção de material em Braille','Audiodescrição de conteúdos audiovisuais','Capacitação da equipe em comunicação acessível','Revisão de todos os canais de comunicação interna'],
+  tecnologica:['Auditoria de acessibilidade WCAG 2.1','Adaptação do sistema para leitores de tela','Correção de contraste e navegação por teclado','Testes com usuários PCD','Treinamento da equipe de TI em acessibilidade digital'],
+  transporte:['Mapeamento de rotas acessíveis','Adequação de veículos para PCD','Capacitação de motoristas','Agendamento via aplicativo acessível','Monitoramento contínuo das rotas'],
+  institucional:['Revisão das políticas internas','Alinhamento com a LBI 13.146/2015','Criação de protocolo formal de atendimento','Capacitação de gestores','Implantação de indicadores de inclusão'],
+  atitudinal:['Programa de conscientização anticapacitismo','Treinamento obrigatório para todas as lideranças','Canal de denúncia anônimo','Mediação de conflitos com equipe especializada','Acompanhamento psicológico quando necessário']
+};
+const CATEGORIAS={arquitetonica:'Arquitetônica',comunicacional:'Comunicacional',tecnologica:'Tecnológica',transporte:'Transporte',institucional:'Institucional',atitudinal:'Atitudinal'};
+const LOCAIS={refinaria:'Refinaria',offshore:'Offshore',escritorio:'Escritório',digital:'Ambiente Digital',rh:'RH'};
+const URGENCIAS={critica:'Crítica',alta:'Alta',media:'Média',baixa:'Baixa'};
+const PRAZOS={critica:'4 horas',alta:'24 horas',media:'72 horas',baixa:'7 dias'};
+
+function processarIA(){
+  const nome=document.getElementById('f-nome').value.trim();
+  const email=document.getElementById('f-email').value.trim();
+  const setor=document.getElementById('f-setor').value.trim();
+  const desc=document.getElementById('f-desc').value.trim();
+
+  if(!dados.tipo||!dados.local||!dados.urgencia){
+    alert('⚠️ Por favor, volte e preencha todas as etapas anteriores.');
+    return;
+  }
+  if(!nome||!email||!desc){
+    const sbtn=document.getElementById('sbtn');
+    sbtn.classList.add('shake');
+    setTimeout(()=>sbtn.classList.remove('shake'),400);
+    alert('⚠️ Preencha todos os campos obrigatórios: nome, email e descrição.');
+    return;
+  }
+
+  const btn=document.getElementById('sbtn');
+  btn.disabled=true;
+  btn.innerHTML='<div class="spin"></div> Processando com IA...';
+
+  setTimeout(()=>{
+    const proto='#AD-'+Math.floor(Math.random()*900000+100000);
+    const plano=PLANOS[dados.tipo]||PLANOS.atitudinal;
+    const prazo=PRAZOS[dados.urgencia]||'24 horas';
+
+    document.getElementById('protocolo').textContent=proto;
+    document.getElementById('prazo').textContent=prazo;
+    document.getElementById('iaBox').innerHTML=`
+      <h4>🤖 Plano de Ação gerado pela IA</h4>
+      <ul>${plano.map(p=>`<li>${p}</li>`).join('')}</ul>
+      <div class="tags">
+        <span class="tag-r">📌 ${CATEGORIAS[dados.tipo]}</span>
+        <span class="tag-r">📍 ${LOCAIS[dados.local]}</span>
+        <span class="tag-r">⚡ ${URGENCIAS[dados.urgencia]}</span>
+      </div>`;
+
+    mostrarEtapa(5);
+
+    const corpo=`PROTOCOLO: ${proto}
+
+=== DADOS DO SOLICITANTE ===
+Nome: ${nome}
+Email: ${email}
+Setor/Matrícula: ${setor||'Não informado'}
+
+=== CLASSIFICAÇÃO IA ===
+Tipo de barreira: ${CATEGORIAS[dados.tipo]}
+Local: ${LOCAIS[dados.local]}
+Urgência: ${URGENCIAS[dados.urgencia]}
+Prazo: ${prazo}
+
+=== DESCRIÇÃO ===
+${desc}
+
+=== PLANO DE AÇÃO GERADO PELA IA ===
+${plano.map((p,i)=>`${i+1}. ${p}`).join('\n')}
+
+---
+Enviado automaticamente pelo Sistema Acessibilidade Digital
+Projeto SENAI MT + Petrobras`;
+
+    const assunto=`[Acessibilidade Digital] ${proto} - Barreira ${CATEGORIAS[dados.tipo]}`;
+    window.location.href=`mailto:felipecosta02838@gmail.com?subject=${encodeURIComponent(assunto)}&body=${encodeURIComponent(corpo)}`;
+
+    btn.disabled=false;
+    btn.innerHTML='🤖 Processar com IA';
+  },1400);
+}
+
+const cb=document.getElementById('cb'),cbx=document.getElementById('cbx'),cbd=document.getElementById('cbd'),ci=document.getElementById('ci');
+let chatStarted=false;
+function toggleChat(){
+  cbx.classList.toggle('open');
+  if(cbx.classList.contains('open')&&!chatStarted){
+    chatStarted=true;
+    botReply('Olá! 👋 Sou o Assistente IA do projeto <b>Acessibilidade Digital</b>. Como posso ajudar?');
+  }
+}
+function addMsg(t,s){const d=document.createElement('div');d.className='msg '+s;d.innerHTML=t;cbd.appendChild(d);cbd.scrollTop=cbd.scrollHeight;}
+function botReply(t){
+  const d=document.createElement('div');d.className='msg typing';d.innerHTML='<span></span><span></span><span></span>';
+  cbd.appendChild(d);cbd.scrollTop=cbd.scrollHeight;
+  setTimeout(()=>{d.remove();addMsg(t,'bot');},700);
+}
+function send(){const v=ci.value.trim();if(!v)return;addMsg(v,'user');ci.value='';botReply(resposta(v));}
+function qa(t){addMsg(t,'user');botReply(resposta(t));}
+function resposta(m){
+  const x=m.toLowerCase();
+  if(x.includes('acessibilidade')&&(x.includes('o que')||x.includes('que é')))return '📖 <b>Acessibilidade</b> é garantir que todas as pessoas, com ou sem deficiência, usem espaços, serviços e informações com autonomia. Nosso projeto combate barreiras arquitetônicas, comunicacionais, tecnológicas, institucionais e atitudinais.';
+  if(x.includes('lei')||x.includes('lbi')||x.includes('legisla')||x.includes('direito'))return '⚖️ Principais leis:<br>• <b>Lei 13.146/2015</b> — LBI (Estatuto da Pessoa com Deficiência)<br>• <b>Lei 8.213/91</b> — Lei de Cotas<br>• <b>Decreto 5.296/2004</b> — Acessibilidade<br>• <b>NBR 9050</b> — Norma técnica de acessibilidade';
+  if(x.includes('ia')||x.includes('inteligência')||x.includes('como ajuda'))return '🤖 A IA do nosso sistema:<br>• Classifica automaticamente as barreiras<br>• Prioriza por gravidade<br>• Gera planos de ação personalizados<br>• Elimina processos manuais e reativos<br>• Centraliza dados para gestão integrada';
+  if(x.includes('capacitismo'))return '🧠 <b>Capacitismo</b> é o preconceito e discriminação contra pessoas com deficiência. Se manifesta em atitudes, palavras, políticas e estruturas que tratam PCD como inferiores. Combatemos com conscientização e treinamento.';
+  if(x.includes('pcd')||x.includes('deficiên'))return '♿ Pessoas com Deficiência têm direito a adaptações, tecnologias assistivas, comunicação acessível e atendimento prioritário. Nosso sistema garante agilidade nessas demandas.';
+  if(x.includes('petrobras'))return '🏢 A Petrobras é parceira deste projeto. O sistema otimiza a gestão de acessibilidade em todas as unidades — refinarias, plataformas, escritórios e sistemas digitais.';
+  if(x.includes('solicit')||x.includes('recurso')||x.includes('pedir')||x.includes('registrar'))return '📝 Para registrar uma demanda: use o <b>formulário acima</b> 👆 Escolha o tipo de barreira, o local e a urgência. A IA gera o plano de ação e envia automaticamente!';
+  if(x.includes('contato')||x.includes('email')||x.includes('falar'))return '📧 Contato: <b>felipecosta02838@gmail.com</b><br>Ou registre sua demanda no formulário acima!';
+  if(x.includes('obrigad')||x.includes('valeu')||x.includes('tchau'))return 'Por nada! 💚 Estou aqui sempre que precisar. Juntos por uma acessibilidade digital cada vez melhor! 🌟';
+  if(x.includes('oi')||x.includes('olá')||x.includes('ola')||x.includes('bom dia')||x.includes('boa tarde'))return 'Olá! 👋 Bem-vindo ao <b>Acessibilidade Digital</b>. Como posso ajudar? Posso falar sobre acessibilidade, leis, capacitismo ou como usar o sistema.';
+  if(x.includes('senai')||x.includes('feira')||x.includes('projeto'))return '🎓 Este é o projeto <b>Acessibilidade Digital</b> da Feira SENAI — "Otimização da Gestão de Acessibilidade e Inclusão Organizacional via IA", parceria Petrobras + Instituto SENAI de Tecnologia de Mato Grosso.';
+  if(x.includes('como usar')||x.includes('como funciona')||x.includes('etapa'))return '📋 Como usar:<br>1️⃣ Escolha o <b>tipo de barreira</b><br>2️⃣ Informe o <b>local</b><br>3️⃣ Selecione a <b>urgência</b><br>4️⃣ Preencha seus dados<br>5️⃣ Clique em <b>"Processar com IA"</b><br>A IA gera um plano de ação personalizado!';
+  return '🤔 Boa pergunta! Posso te ajudar com: <b>acessibilidade, leis (LBI), capacitismo, como a IA funciona, ou como registrar uma demanda</b>. O que prefere?';
+}
+
+mostrarEtapa(1);
+</script>
+
+</body>
+</html>
